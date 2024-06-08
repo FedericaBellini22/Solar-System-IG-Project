@@ -8,7 +8,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-# TO INITILIZE SOLAR SYSTEM PROJECT WITH JAVASCRIPT AND REACT THREE FIBER:
+TO INITIALIZE SOLAR SYSTEM PROJECT WITH JAVASCRIPT AND REACT THREE FIBER:
 1) npm create vite@latest . --template react
 		select package name 
 		select React

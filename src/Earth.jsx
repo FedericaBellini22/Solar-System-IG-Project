@@ -2,6 +2,7 @@ import { useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { useRef } from "react"
 import Moon from "./Moon"
+import ISS from "./ISS"
 
 const Earth = ({ displacementScale }) => {
     const earthRef = useRef()
@@ -37,6 +38,7 @@ const Earth = ({ displacementScale }) => {
                     displacementScale={displacementScale}
                 />
             </mesh>
+            <ISS />
             <Moon />
         </group>
     )

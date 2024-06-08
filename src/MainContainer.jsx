@@ -1,4 +1,4 @@
-import { OrbitControls, useHelper } from  "@react-three/drei"
+import { useHelper } from  "@react-three/drei"
 import AnimatedStars from "./AnimatedStars"
 import { useRef } from "react"
 import Earth from "./Earth"
@@ -14,19 +14,27 @@ const MainContainer = () => {
     return (
         <>
             <color attach='background' args={['black']} />
-            <OrbitControls />
             <AnimatedStars />
             {/* A light that gets emitted in a specific direction. 
             This light will behave as though it is infinitely far away and the rays produced from it are all parallel. 
             The common use case for this is to simulate daylight; 
             the sun is far enough away that its position can be considered to be infinite, and all light rays coming from it are parallel. */}
-            <directionalLight ref={directionalLightRef} 
-                position={(0, 0, 10)} 
+            <directionalLight 
+                castShadow
+                ref={directionalLightRef} 
+                position={[0, 0, 10]} 
                 intensity={1} 
                 //color = {0xff0000}
             />
-            <directionalLight ref={directionalLightRefTwo} position={(0, 0, -10)}/>
-            <Earth />
+            
+            <directionalLight 
+                castShadow 
+                ref={directionalLightRefTwo} 
+                position={[0, 0, -10]}
+            />
+
+            {/*<ambientLight />*/}
+            <Earth displacementScale={0.15} />
         </>
     )
 }

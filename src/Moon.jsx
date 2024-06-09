@@ -37,7 +37,7 @@ const Moon = React.memo(() => {
             <meshPhongMaterial  map = {moonTexture} 
             emissiveMap={moonTexture}
             emissive={0xffffff}
-            emissiveIntensity={0.05}/>
+            emissiveIntensity={0.1}/>
         </mesh>
     )
 })

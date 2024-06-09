@@ -7,7 +7,6 @@ import * as THREE from "three"
 
 const Earth = React.memo(({ displacementScale }) => {
     const earthRef = useRef()
-    const earthPositionRef = useRef(new THREE.Vector3(8, 0, 0)) //create a reference to the Earth's position vector
     const clockRef = useRef(new THREE.Clock) //create a reference to the clock
 
     const [hovered, hover] = useState(false)
@@ -57,9 +56,22 @@ const Earth = React.memo(({ displacementScale }) => {
     useFrame(({camera}) =>  {
        updateEarthPosition()
        const earthPositionRef = earthRef.current.position
+    
+       //with this trick I can follow directly the earth with my camera
+       const cameraTargetPosition = new THREE.Vector3(
+            earthPositionRef.x +10, 
+            earthPositionRef.y + 2, 
+            earthPositionRef.z + 5
+        )
 
        if (followingEarth){
         camera.lookAt(earthPositionRef)
+        camera.position.copy(cameraTargetPosition)
+       } else {
+            const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
+            const originalCameraTarget = new THREE.Vector3(0, 0, 0)
+            camera.lookAt(originalCameraTarget)
+            camera.position.copy(originalCameraPosition)
        }
     })
     

@@ -32,7 +32,7 @@ const ISS = React.memo(() => {
                 ref={issRef}
                 object={memoizedISS.scene} 
                 position={[xAxis, 0, 0]} 
-                scale={0.005} 
+                scale={0.008} 
             />
         </mesh>
     )

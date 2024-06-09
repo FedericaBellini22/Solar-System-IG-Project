@@ -3,6 +3,7 @@ import AnimatedStars from "./AnimatedStars"
 import { useRef } from "react"
 import Earth from "./Earth"
 import *as THREE from "three"
+import Sun from "./Sun"
 
 const MainContainer = () => {
     const directionalLightRef = useRef()
@@ -34,6 +35,7 @@ const MainContainer = () => {
             />
 
             {/*<ambientLight />*/}
+            <Sun />
             <Earth displacementScale={0.15} />
         </>
     )

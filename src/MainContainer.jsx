@@ -23,7 +23,7 @@ const MainContainer = () => {
             This light will behave as though it is infinitely far away and the rays produced from it are all parallel. 
             The common use case for this is to simulate daylight; 
             the sun is far enough away that its position can be considered to be infinite, and all light rays coming from it are parallel. */}
-            <directionalLight 
+            {/* <directionalLight 
                 castShadow
                 ref={directionalLightRef} 
                 position={[0, 0, 10]} 
@@ -35,7 +35,7 @@ const MainContainer = () => {
                 castShadow 
                 ref={directionalLightRefTwo} 
                 position={[0, 0, -10]}
-            />
+            /> */}
 
             {/* <ambientLight intensity={0.1} /> */}
             <Sun />

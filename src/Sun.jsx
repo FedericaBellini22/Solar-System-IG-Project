@@ -24,7 +24,7 @@ const Sun = React.memo(() => {
             <sphereGeometry args = {[2, 32, 32]}/>
             {/* this allow us to use a texture for the moon */}
             <meshPhongMaterial  map={sunTexture} emissiveMap={sunTexture} emissiveIntensity={0.6} emissive={0xffffff}/>
-            <pointLight castShadow intensity={500} />
+            <pointLight castShadow intensity={200} />
         </mesh>
     )
 })

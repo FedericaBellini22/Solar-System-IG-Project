@@ -26,7 +26,7 @@ const ISS = React.memo(() => {
     
 
     return (
-        <mesh> 
+        <mesh castShadow receiveShadow> 
             {/* scale is used to zoom in or out the 3d station */}
             <primitive 
                 ref={issRef}

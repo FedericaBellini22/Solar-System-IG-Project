@@ -1,20 +1,44 @@
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
-import MainContainer from "./MainContainer"
-
+import { Canvas, useThree } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import MainContainer from "./MainContainer";
+import SolarSystemGUI from './SolarSystemGUI';
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [data, setData] = useState({
+    simulationTimeScale: 60,
+    semiMajorAxis: 10,
+    eccentricity: 0.0167,
+    fov: 35, // Aggiungi il parametro fov
+  });
+
+  const handleUpdate = (newData) => {
+    setData(prevData => ({ ...prevData, ...newData }));
+  };
 
   return (
-    <Canvas 
-     shadows
-     camera={{fov: 35, near: 0.1, far: 1000, 
-     position: [16, 8.5, 19.5]}}>
-     <color attach='background' args={['black']} />
-     <OrbitControls />
-     <MainContainer />
-    </Canvas>
-  )
+    <>
+      <Canvas 
+       shadows
+       camera={{ fov: data.fov, near: 0.1, far: 1000, position: [16, 8.5, 19.5] }}>
+       <color attach='background' args={['black']} />
+       <OrbitControls />
+       <MainContainer controls={data} />
+       <UpdateCamera fov={data.fov} />
+      </Canvas>
+      <SolarSystemGUI data={data} handleUpdate={handleUpdate} />
+    </>
+  );
 }
 
-export default App
+// Component to update camera FOV dynamically
+const UpdateCamera = ({ fov }) => {
+  const { camera } = useThree();
+  useEffect(() => {
+    camera.fov = fov;
+    camera.updateProjectionMatrix();
+  }, [fov, camera]);
+  return null;
+};
+
+export default App;

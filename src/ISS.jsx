@@ -10,20 +10,28 @@ const ISS = React.memo(() => {
         return useGLTF('/ISSModel/ISS_stationary.gltf')
     })
 
-    const xAxis = 2
+    const semiMajorAxis = 2 // Semi-major axis
+    const eccentricity = 0.05 // Eccentricity of the orbit
+
+    // Function to calculate position in an elliptical orbit
+    const calculateEllipticalPosition = (angle, semiMajorAxis, eccentricity) => {
+        const semiMinorAxis = semiMajorAxis * Math.sqrt(1 - eccentricity * eccentricity)
+        const radius = semiMajorAxis * (1 - eccentricity * eccentricity) / (1 + eccentricity * Math.cos(angle))
+        const x = radius * Math.cos(angle)
+        const z = radius * Math.sin(angle)
+        return { x, z }
+    }
+
     const updateISSPosition = useCallback(() => {
-        
-        //Orbit Rotation
-        issRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * 0.8) * xAxis
-        issRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * 0.8) * xAxis
+        //0.8 is the angular velocity of the ISS
+        const angle = clockRef.current.getElapsedTime() * 0.8
+        const { x, z } = calculateEllipticalPosition(angle, semiMajorAxis, eccentricity)
+        issRef.current.position.set(x, 0, z)
+    }, [semiMajorAxis, eccentricity])
 
-    }, [])
-
-    //this is for the moon rotation around the Y-axis
     useFrame(() =>  { 
         updateISSPosition()
     })
-    
 
     return (
         <mesh castShadow receiveShadow> 
@@ -31,7 +39,7 @@ const ISS = React.memo(() => {
             <primitive 
                 ref={issRef}
                 object={memoizedISS.scene} 
-                position={[xAxis, 0, 0]} 
+                position={[semiMajorAxis, 0, 0]} 
                 scale={0.008} 
             />
         </mesh>

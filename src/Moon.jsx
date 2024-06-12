@@ -11,7 +11,7 @@ const Moon = React.memo(() => {
     ])
 
     const clockRef = useRef(new THREE.Clock)
-    const semiMajorAxis = 4 // Semi-major axis
+    const semiMajorAxis = 2.5 // Semi-major axis
     const eccentricity = 0.05 // Eccentricity of the orbit
 
     // Function to calculate position in an elliptical orbit
@@ -39,7 +39,7 @@ const Moon = React.memo(() => {
         <mesh castShadow receiveShadow ref={moonRef} position={[semiMajorAxis, 0, 0]}>
             {/* this is the shape of our mesh */}
             {/* Radius , X-axis , Y-axis */}
-            <sphereGeometry args = {[0.5, 32, 32]}/>
+            <sphereGeometry args = {[0.3, 32, 32]}/>
             {/* this allow us to use a texture for the moon */}
             <meshPhongMaterial  map = {moonTexture} 
             emissiveMap={moonTexture}

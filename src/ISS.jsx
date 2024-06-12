@@ -10,7 +10,7 @@ const ISS = React.memo(() => {
         return useGLTF('/ISSModel/ISS_stationary.gltf')
     })
 
-    const semiMajorAxis = 2 // Semi-major axis
+    const semiMajorAxis = 1.5 // Semi-major axis
     const eccentricity = 0.05 // Eccentricity of the orbit
 
     // Function to calculate position in an elliptical orbit
@@ -40,7 +40,7 @@ const ISS = React.memo(() => {
                 ref={issRef}
                 object={memoizedISS.scene} 
                 position={[semiMajorAxis, 0, 0]} 
-                scale={0.008} 
+                scale={0.005} 
             />
         </mesh>
     )

@@ -4,6 +4,9 @@ import { useRef } from "react";
 import Earth from "./Earth";
 import * as THREE from "three";
 import Sun from "./Sun";
+import Mercury from "./Mercury";
+import Venus from "./Venus";
+import Mars from "./Mars";
 import { Perf } from "r3f-perf";
 import CameraPositionLogging from "./helpers/CameraPositionLogging";
 
@@ -27,6 +30,9 @@ const MainContainer = ({ controls }) => {
               earthShininess={controls.earthShininess}
               earthRadius={controls.earthRadius}
             />
+            <Mercury />
+            <Mars />
+            <Venus />
         </>
     );
 }

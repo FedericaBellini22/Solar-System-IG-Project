@@ -18,12 +18,14 @@ const MainContainer = ({ controls }) => {
             <Perf className="perf-container" />
             <CameraPositionLogging event='mousedown' />
             <AnimatedStars />
-            <Sun />
+            <Sun sunLightIntensity={controls.sunLightIntensity} />
             <Earth 
               displacementScale={0.15} 
               simulationTimeScale={controls.simulationTimeScale}
               semiMajorAxis={controls.semiMajorAxis}
               eccentricity={controls.eccentricity}
+              earthShininess={controls.earthShininess}
+              earthRadius={controls.earthRadius}
             />
         </>
     );

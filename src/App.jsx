@@ -9,7 +9,10 @@ function App() {
     simulationTimeScale: 60,
     semiMajorAxis: 10,
     eccentricity: 0.0167,
-    fov: 35, // Aggiungi il parametro fov
+    fov: 35, 
+    sunLightIntensity: 200,
+    earthShininess: 1000,
+    earthRadius: 1
   });
 
   const handleUpdate = (newData) => {

@@ -2,7 +2,7 @@ import { useTexture } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import React , {useRef} from "react"
 
-const Sun = React.memo(() => {
+const Sun = React.memo(({sunLightIntensity}) => {
     const sunRef = useRef()
 
     const [sunTexture] = useTexture([
@@ -24,7 +24,7 @@ const Sun = React.memo(() => {
             <sphereGeometry args = {[2, 32, 32]}/>
             {/* this allow us to use a texture for the moon */}
             <meshPhongMaterial  map={sunTexture} emissiveMap={sunTexture} emissiveIntensity={0.6} emissive={0xffffff}/>
-            <pointLight castShadow intensity={200} />
+            <pointLight castShadow intensity={sunLightIntensity} />
         </mesh>
     )
 })

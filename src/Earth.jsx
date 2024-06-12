@@ -5,7 +5,7 @@ import Moon from "./Moon";
 import ISS from "./ISS";
 import * as THREE from "three";
 
-const Earth = React.memo(({ displacementScale, simulationTimeScale, semiMajorAxis, eccentricity }) => {
+const Earth = React.memo(({ displacementScale, simulationTimeScale, semiMajorAxis, eccentricity, earthShininess, earthRadius }) => {
     const earthRef = useRef();
     const clockRef = useRef(new THREE.Clock());
 
@@ -79,12 +79,12 @@ const Earth = React.memo(({ displacementScale, simulationTimeScale, semiMajorAxi
                 onClick={toggleFollowingEarth}
                 onPointerOver={() => hover(true)} 
                 onPointerOut={() => hover(false)}>
-                <sphereGeometry args={[1, 32, 32]} />
+                <sphereGeometry args={[earthRadius, 32, 32]} />
                 <meshPhongMaterial  
                     map={earthTexture} 
                     normalMap={earthNormalMap} 
                     specularMap={earthSpecularMap}
-                    shininess={1000}
+                    shininess={earthShininess}
                     displacementMap={earthDisplacementMap}
                     displacementScale={displacementScale}
                     emissiveMap={earthEmissiveMap}

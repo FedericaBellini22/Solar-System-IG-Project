@@ -7,6 +7,7 @@ import Sun from "./Sun";
 import Mercury from "./Mercury";
 import Venus from "./Venus";
 import Mars from "./Mars";
+import Jupiter from "./Jupiter";
 import { Perf } from "r3f-perf";
 import CameraPositionLogging from "./helpers/CameraPositionLogging";
 
@@ -32,6 +33,7 @@ const MainContainer = ({ controls }) => {
             />
             <Mercury />
             <Mars />
+            <Jupiter />
             <Venus />
         </>
     );

@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 function App() {
   const [data, setData] = useState({
     simulationTimeScale: 60,
-    semiMajorAxis: 12.5,
+    semiMajorAxis: 11,
     eccentricity: 0.0167,
     fov: 35, 
     sunLightIntensity: 200,

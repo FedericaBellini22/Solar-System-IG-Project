@@ -5,7 +5,7 @@ import Moon from "./Moon";
 import ISS from "./ISS";
 import * as THREE from "three";
 
-const Earth = React.memo(({ displacementScale, simulationTimeScale, semiMajorAxis, eccentricity, earthShininess, earthRadius }) => {
+const Earth = React.memo(({ displacementScale, earthSimulationTimeScale, earthSemiMajorAxis, earthEccentricity, earthShininess, earthRadius }) => {
     const earthRef = useRef();
     const clockRef = useRef(new THREE.Clock());
 
@@ -26,10 +26,10 @@ const Earth = React.memo(({ displacementScale, simulationTimeScale, semiMajorAxi
         'assets/earth_night.jpg'
     ]);
 
-    const earthAngularVelocity = (2 * Math.PI) / simulationTimeScale;
+    const earthAngularVelocity = (2 * Math.PI) / earthSimulationTimeScale;
 
-    const calculateEllipticalPosition = (angle, semiMajorAxis, eccentricity) => {
-        const radius = semiMajorAxis * (1 - eccentricity * eccentricity) / (1 + eccentricity * Math.cos(angle));
+    const calculateEllipticalPosition = (angle, earthSemiMajorAxis, earthEccentricity) => {
+        const radius = earthSemiMajorAxis * (1 - earthEccentricity * earthEccentricity) / (1 + earthEccentricity * Math.cos(angle));
         const x = radius * Math.cos(angle);
         const z = radius * Math.sin(angle);
         return { x, z };
@@ -37,10 +37,10 @@ const Earth = React.memo(({ displacementScale, simulationTimeScale, semiMajorAxi
 
     const updateEarthPosition = useCallback(() => {
         const angle = clockRef.current.getElapsedTime() * earthAngularVelocity;
-        const { x, z } = calculateEllipticalPosition(angle, semiMajorAxis, eccentricity);
+        const { x, z } = calculateEllipticalPosition(angle, earthSemiMajorAxis, earthEccentricity);
         earthRef.current.position.set(x, 0, z);
         earthRef.current.rotation.y += 0.002;
-    }, [semiMajorAxis, eccentricity, earthAngularVelocity]);
+    }, [earthSemiMajorAxis, earthEccentricity, earthAngularVelocity]);
 
     const toggleFollowingEarth = () => {
         setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth);

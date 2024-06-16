@@ -25,13 +25,19 @@ const MainContainer = ({ controls }) => {
             <Sun sunLightIntensity={controls.sunLightIntensity} />
             <Earth 
               displacementScale={0.15} 
-              simulationTimeScale={controls.simulationTimeScale}
-              semiMajorAxis={controls.semiMajorAxis}
-              eccentricity={controls.eccentricity}
+              earthSimulationTimeScale={controls.earthSimulationTimeScale}
+              earthSemiMajorAxis={controls.earthSemiMajorAxis}
+              earthEccentricity={controls.earthEccentricity}
               earthShininess={controls.earthShininess}
               earthRadius={controls.earthRadius}
             />
-            <Mercury />
+            <Mercury 
+                mercurySimulationTimeScale = {controls.mercurySimulationTimeScale}
+                mercurySemiMajorAxis = {controls.mercurySemiMajorAxis} 
+                mercuryEccentricity = {controls.mercuryEccentricity}
+                mercuryIntensity = {controls.mercuryIntensity}
+                mercuryRadius = {controls.mercuryRadius}
+            />
             <Mars />
             <Jupiter />
             <Venus />

@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import React, { useRef, useCallback } from "react";
 import * as THREE from "three";
 
-const Mercury = React.memo(() => {
+const Mercury = React.memo(({ mercurySimulationTimeScale, mercurySemiMajorAxis, mercuryEccentricity, mercuryIntensity, mercuryRadius }) => {
     const mercuryRef = useRef();
     const clockRef = useRef(new THREE.Clock());
 
@@ -13,14 +13,10 @@ const Mercury = React.memo(() => {
         'assets/mercury.jpg', 
     ]); 
 
-    const simulationTimeScale = 8 //do the proportion with the earth 60 : 365 = x : 88
-    const semiMajorAxis = 4;
-    const eccentricity = 0.2056;
+    const mercuryAngularVelocity = (2 * Math.PI) / mercurySimulationTimeScale;
 
-    const mercuryAngularVelocity = (2 * Math.PI) / simulationTimeScale;
-
-    const calculateEllipticalPosition = (angle, semiMajorAxis, eccentricity) => {
-        const radius = semiMajorAxis * (1 - eccentricity * eccentricity) / (1 + eccentricity * Math.cos(angle));
+    const calculateEllipticalPosition = (angle, mercurySemiMajorAxis , mercuryEccentricity ) => {
+        const radius = mercurySemiMajorAxis  * (1 - mercuryEccentricity  * mercuryEccentricity ) / (1 + mercuryEccentricity  * Math.cos(angle));
         const x = radius * Math.cos(angle);
         const z = radius * Math.sin(angle);
         return { x, z };
@@ -28,10 +24,10 @@ const Mercury = React.memo(() => {
 
     const updateMercuryPosition = useCallback(() => {
         const angle = clockRef.current.getElapsedTime() * mercuryAngularVelocity;
-        const { x, z } = calculateEllipticalPosition(angle, semiMajorAxis, eccentricity);
+        const { x, z } = calculateEllipticalPosition(angle, mercurySemiMajorAxis , mercuryEccentricity );
         mercuryRef.current.position.set(x, 0, z);
         mercuryRef.current.rotation.y += 0.002;
-    }, [semiMajorAxis, eccentricity, mercuryAngularVelocity]);
+    }, [mercurySemiMajorAxis , mercuryEccentricity , mercuryAngularVelocity]);
 
     useFrame(() => {
         updateMercuryPosition()
@@ -43,13 +39,13 @@ const Mercury = React.memo(() => {
                 receiveShadow 
                 ref={mercuryRef}
             >
-                <sphereGeometry args={[0.38, 32, 32]} />
+                <sphereGeometry args={[mercuryRadius, 32, 32]} />
                 <meshPhongMaterial  
                     map={mercuryTexture} 
                     displacementScale={0.1}
                     emissiveMap={mercuryTexture}
                     emissive={0xffffff}
-                    emissiveIntensity={0.1}
+                    emissiveIntensity={mercuryIntensity}
                 />
             </mesh>
     );

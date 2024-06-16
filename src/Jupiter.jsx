@@ -14,14 +14,14 @@ const Jupiter = React.memo(() => {
     ]);
 
     
-    const simulationTimeScale = 200; // Giove ruota in 4333 giorni
-    const semiMajorAxis = 18; // Incrementato per evitare collisioni
-    const eccentricity = 0.0489;
+    const simulationTimeScale = 711.4; // Jupter rotates in 4333 days
+    const jupiterSemiMajorAxis  = 20; 
+    const jupiterEccentricity  = 0.0489;
 
     const jupiterAngularVelocity = (2 * Math.PI) / simulationTimeScale;
 
-    const calculateEllipticalPosition = (angle, semiMajorAxis, eccentricity) => {
-        const radius = semiMajorAxis * (1 - eccentricity * eccentricity) / (1 + eccentricity * Math.cos(angle));
+    const calculateEllipticalPosition = (angle, jupiterSemiMajorAxis , jupiterEccentricity ) => {
+        const radius = jupiterSemiMajorAxis  * (1 - jupiterEccentricity  * jupiterEccentricity ) / (1 + jupiterEccentricity  * Math.cos(angle));
         const x = radius * Math.cos(angle);
         const z = radius * Math.sin(angle);
         return { x, z };
@@ -29,10 +29,10 @@ const Jupiter = React.memo(() => {
 
     const updateJupiterPosition = useCallback(() => {
         const angle = clockRef.current.getElapsedTime() * jupiterAngularVelocity;
-        const { x, z } = calculateEllipticalPosition(angle, semiMajorAxis, eccentricity);
+        const { x, z } = calculateEllipticalPosition(angle, jupiterSemiMajorAxis , jupiterEccentricity );
         jupiterRef.current.position.set(x, 0, z);
         jupiterRef.current.rotation.y += 0.002;
-    }, [semiMajorAxis, eccentricity, jupiterAngularVelocity]);
+    }, [jupiterSemiMajorAxis , jupiterEccentricity , jupiterAngularVelocity]);
 
     useFrame(() => {
         updateJupiterPosition()

@@ -1,21 +1,66 @@
 import React from 'react';
 import { useControls, Leva } from 'leva';
-import './SolarSystemGUI.css'; // Importa il file CSS
+import './SolarSystemGUI.css'; // import css file
 
 const SolarSystemGUI = ({ data, handleUpdate }) => {
-  const { simulationTimeScale, semiMajorAxis, eccentricity, fov, sunLightIntensity, earthShininess, earthRadius } = useControls({
-    simulationTimeScale: { value: data.simulationTimeScale, min: 1, max: 120 },
-    semiMajorAxis: { value: data.semiMajorAxis, min: 1, max: 20 },
-    eccentricity: { value: data.eccentricity, min: 0, max: 1 },
+  const { 
+    earthSimulationTimeScale, 
+    earthSemiMajorAxis, 
+    earthEccentricity, 
+    earthShininess, 
+    earthRadius,
+    mercurySimulationTimeScale,
+    mercurySemiMajorAxis,
+    mercuryEccentricity,
+    mercuryIntensity,
+    mercuryRadius,
+    fov, 
+    sunLightIntensity, 
+     } = useControls({
+    earthSimulationTimeScale: { value: data.earthSimulationTimeScale, min: 1, max: 120 },
+    earthSemiMajorAxis: { value: data.earthSemiMajorAxis, min: 1, max: 20 },
+    earthEccentricity: { value: data.earthEccentricity, min: 0, max: 1 },
+    earthShininess: {value: data.earthShininess, min: 0, max: 5000},
+    earthRadius: {value: data.earthRadius, min: 0, max: 10},
+    mercurySimulationTimeScale: {value: data.mercurySimulationTimeScale, min: 0, max: 120},
+    mercurySemiMajorAxis: {value: data.mercurySemiMajorAxis, min: 0, max: 20},
+    mercuryEccentricity: {value: data.mercuryEccentricity, min: 0, max: 1},
+    mercuryIntensity: {value: data.mercuryIntensity, min: 0, max: 5000},
+    mercuryRadius: {value: data.mercuryRadius, min: 0, max: 10},
     fov: { value: data.fov, min: 10, max: 100 },
     sunLightIntensity: { value: data.sunLightIntensity, min: 0, max: 1000 },
-    earthShininess: {value: data.earthShininess, min: 0, max: 5000},
-    earthRadius: {value: data.earthRadius, min: 0, max: 10}
   });
 
   React.useEffect(() => {
-    handleUpdate({ simulationTimeScale, semiMajorAxis, eccentricity, fov, sunLightIntensity, earthShininess, earthRadius });
-  }, [simulationTimeScale, semiMajorAxis, eccentricity, fov, sunLightIntensity, earthShininess, earthRadius]);
+    handleUpdate({ 
+      earthSimulationTimeScale, 
+      earthSemiMajorAxis, 
+      earthEccentricity,
+      earthShininess, 
+      earthRadius, 
+      mercurySimulationTimeScale,
+      mercurySemiMajorAxis,
+      mercuryEccentricity,
+      mercuryIntensity,
+      mercuryRadius,
+      fov, 
+      sunLightIntensity, 
+      
+    });
+  }, [
+    earthSimulationTimeScale, 
+    earthSemiMajorAxis, 
+    earthEccentricity, 
+    earthShininess, 
+    earthRadius,
+    mercurySimulationTimeScale,
+    mercurySemiMajorAxis,
+    mercuryEccentricity,
+    mercuryIntensity,
+    mercuryRadius,
+    fov, 
+    sunLightIntensity, 
+  ]);
 
   return (
     <div className="custom-leva-container">

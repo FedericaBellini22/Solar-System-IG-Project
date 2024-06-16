@@ -6,13 +6,19 @@ import React, { useState, useEffect } from 'react';
 
 function App() {
   const [data, setData] = useState({
-    simulationTimeScale: 60,
-    semiMajorAxis: 11,
-    eccentricity: 0.0167,
+    earthSimulationTimeScale: 60,
+    earthSemiMajorAxis: 12,
+    earthEccentricity: 0.0167,
+    earthShininess: 1000,
+    earthRadius: 1,
+    mercurySimulationTimeScale: 14.45, 
+    mercurySemiMajorAxis: 4.257, 
+    mercuryEccentricity: 0.2056, 
+    mercuryIntensity: 0.1,
+    mercuryRadius: 0.4,
     fov: 35, 
     sunLightIntensity: 200,
-    earthShininess: 1000,
-    earthRadius: 1
+    
   });
 
   const handleUpdate = (newData) => {

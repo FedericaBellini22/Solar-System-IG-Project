@@ -26,6 +26,11 @@ const Earth = React.memo(({ displacementScale, earthSimulationTimeScale, earthSe
         'assets/earth_night.jpg'
     ]);
 
+
+    //the angular velocity is computed by considering the earthSimulationTimeScale, 
+    //it is a value that reduces the rotation's period around the sun
+    //for example the earth completes one full rotation around the sun in 365 days
+    //so that the rotation around the sun occurs in 60 seconds
     const earthAngularVelocity = (2 * Math.PI) / earthSimulationTimeScale;
 
     const calculateEllipticalPosition = (angle, earthSemiMajorAxis, earthEccentricity) => {
@@ -35,9 +40,14 @@ const Earth = React.memo(({ displacementScale, earthSimulationTimeScale, earthSe
         return { x, z };
     };
 
+
+    //useCallback is a React hook that memoizes 
+    //a function and only recreates it if one of its dependencies changes. 
+    //This is useful for optimizing performance, especially in components that update frequently.
     const updateEarthPosition = useCallback(() => {
         const angle = clockRef.current.getElapsedTime() * earthAngularVelocity;
         const { x, z } = calculateEllipticalPosition(angle, earthSemiMajorAxis, earthEccentricity);
+        //the Earth's position is updated to the new calculated coordinates.
         earthRef.current.position.set(x, 0, z);
         earthRef.current.rotation.y += 0.002;
     }, [earthSemiMajorAxis, earthEccentricity, earthAngularVelocity]);

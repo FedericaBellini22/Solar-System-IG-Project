@@ -16,7 +16,6 @@ const Moon = React.memo(() => {
 
     // Function to calculate position in an elliptical orbit
     const calculateEllipticalPosition = (angle, semiMajorAxis, eccentricity) => {
-        const semiMinorAxis = semiMajorAxis * Math.sqrt(1 - eccentricity * eccentricity)
         const radius = semiMajorAxis * (1 - eccentricity * eccentricity) / (1 + eccentricity * Math.cos(angle))
         const x = radius * Math.cos(angle)
         const z = radius * Math.sin(angle)

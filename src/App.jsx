@@ -29,8 +29,10 @@ function App() {
     <>
       <Canvas 
        shadows
+       //This projection mode is designed to mimic the way the human eye sees. It is the most common projection mode used for rendering a 3D scene. 
        camera={{ fov: data.fov, near: 0.1, far: 1000, position: [16, 8.5, 19.5] }}>
        <color attach='background' args={['black']} />
+       {/* Orbit controls allow the camera to orbit around a target. */ }
        <OrbitControls />
        <MainContainer controls={data} />
        <UpdateCamera fov={data.fov} />
